@@ -11837,7 +11837,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">housing_prices_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">housing_prices</span><span class="p">)</span>
@@ -11847,7 +11847,7 @@ div#notebook {
 <span class="n">total_houses</span> <span class="o">=</span> <span class="n">housing_prices_np</span><span class="o">.</span><span class="n">size</span>
 
 <span class="c1"># Number of features in the dataset</span>
-<span class="n">total_features</span> <span class="o">=</span> <span class="n">housing_features_np</span><span class="o">.</span><span class="n">size</span>
+<span class="n">total_features</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_features_np</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Minimum housing value in the dataset</span>
 <span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">housing_prices_np</span><span class="p">)</span>
@@ -11888,7 +11888,7 @@ div#notebook {
 <pre>Boston Housing dataset statistics (in $1000&#39;s):
 
 Total number of houses: 506
-Total number of features: 6578
+Total number of features: 13
 Minimum house price: 5.0
 Maximum house price: 50.0
 Mean house price: 22.533
@@ -12067,7 +12067,7 @@ Ensure that you have executed the code block once you are done. You'll know the 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-We do this in order to assess the performance of our model in making classifications. We use the training set to build our model and the test set to test our model.</p>
+We do this in order to assess the performance of our model in correctly predicting home values. We use the training set to build our model and the test set to test our model.</p>
 
 </div>
 </div>
@@ -12275,7 +12275,7 @@ The grid search algorithm will, given an estimator, list of parameters, and a sc
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
 Cross-validation is splitting our given data into training and test subsets and, after learning a model from the training set, validating the success of our model on the independent test set.</p>
-<p>Cross-validation is helpful in grid search because it allows us to optimize our model over various test/train splits and be confident that our model is a good one.</p>
+<p>Cross validation is necessary to grid search to provide a performance metric for how it is doing in optimizing the parameters. With K-fold cross validation, we can be confident that we are not making the correct optimization. Because the data is split in several different ways, we are less likely to make an incorrect generalization due to an awkward data split. In this way, we avoid overfitting as there are several splits to which the model must fit.</p>
 
 </div>
 </div>
@@ -13202,7 +13202,7 @@ hBBCiOOO/wejwdJQuwKmqAAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-I have chosen the learning curve graph with max_depth = 1. As the size of the training set increases, the training error gradually increases. The testing error very gradually decreases as the size of the training set increases.</p>
+I have chosen the learning curve graph with max_depth = 1. As the size of the training set increases, the training error first rapidly increases until around n=25. At this point, the training error seems to gradually increase from total error of about 30 to total error of about 45 at n=350. The testing error starts extremely high, and rapidly decreases until about n=10. At n=25, we see a spike in error due to some sensitivity but the graph then levels off at total level of about 50. From about n=30 onward, we see a very gradual decrease in error.</p>
 
 </div>
 </div>
@@ -13223,7 +13223,7 @@ I have chosen the learning curve graph with max_depth = 1. As the size of the tr
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-With max_depth=1 and using the full training set, the model suffers from high variance. The max_depth=10 model suffers from high variance in this case.</p>
+With max_depth=1 and using the full training set, the model suffers from high bias. The training error is quite high at around 50 and it leads me to believe the model is oversimplified for the problem. The max_depth=10 model suffers from high variance in this case. The training error is close to 0 as the model is allowed to be exceedingly complicated to fit the training data. The test error appears to remain around 25 however. When we conside the max_depth=6 model, we see that its training error at full training set is even lower than that of the max_depth=10 model. This makes me even more confident that the max_depth=10 model is overfit.</p>
 
 </div>
 </div>
